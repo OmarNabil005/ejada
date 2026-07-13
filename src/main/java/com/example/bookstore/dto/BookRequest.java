@@ -9,8 +9,8 @@ public class BookRequest {
     @NotBlank(message = "Title is required")
     private String title;
 
-    @NotBlank(message = "Author is required")
-    private String author;
+    @NotNull(message = "Author ID is required")
+    private Long authorId;
 
     @NotBlank(message = "ISBN is required")
     private String isbn;
@@ -22,9 +22,9 @@ public class BookRequest {
     public BookRequest() {
     }
 
-    public BookRequest(String title, String author, String isbn, Double price) {
+    public BookRequest(String title, Long authorId, String isbn, Double price) {
         this.title = title;
-        this.author = author;
+        this.authorId = authorId;
         this.isbn = isbn;
         this.price = price;
     }
@@ -37,12 +37,12 @@ public class BookRequest {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     public String getIsbn() {

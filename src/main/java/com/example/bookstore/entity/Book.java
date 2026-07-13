@@ -1,5 +1,6 @@
 package com.example.bookstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,8 +14,10 @@ public class Book {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private String author;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "author_id", nullable = false)
+    @JsonIgnoreProperties("books")
+    private Author author;
 
     @Column(nullable = false, unique = true)
     private String isbn;
@@ -25,7 +28,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String author, String isbn, Double price) {
+    public Book(String title, Author author, String isbn, Double price) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -49,11 +52,11 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
