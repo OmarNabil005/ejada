@@ -2,6 +2,7 @@ package com.example.bookstore.controller;
 
 import com.example.bookstore.dto.AuthorRequest;
 import com.example.bookstore.entity.Author;
+import com.example.bookstore.entity.Book;
 import com.example.bookstore.service.AuthorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -48,5 +49,11 @@ public class AuthorController {
     public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
         authorService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/books")
+    public ResponseEntity<List<Book>> getAuthorBooks(@PathVariable Long id) {
+        Author author = authorService.getById(id);
+        return ResponseEntity.ok(author.getBooks());
     }
 }
